@@ -42,6 +42,21 @@ mod tests {
     }
 
     #[test]
+    fn circle() {
+        let mut svg = Svg::new(50.0, 50.0);
+
+        svg.add_element("circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" />");
+
+        println!("{}", svg.to_string());
+
+        assert_eq!(
+            svg.to_string(),
+            "<svg viewBox=\"0 0 50 100\" \
+            xmlns=\"http://www.w3.org/2000/svg\"></svg>"
+        );
+    }
+
+    #[test]
     fn asdf() {
         let mut scattered_tree = tr(0);
         scattered_tree = scattered_tree / tr(1);

@@ -1,13 +1,19 @@
 use std::fmt;
+use trees::tr;
 
 pub struct Svg {
     width: f32,
     height: f32,
+    nodes: trees::Tree<String>,
 }
 
 impl Svg {
     pub fn new(width: f32, height: f32) -> Self {
-        Self { width, height }
+        Self {
+            width,
+            height,
+            nodes: tr(String::new()),
+        }
     }
 
     fn svg_tag(&self) -> String {
@@ -15,6 +21,10 @@ impl Svg {
             "<svg viewBox=\"0 0 {} {}\" xmlns=\"http://www.w3.org/2000/svg\"></svg>",
             self.width, self.height
         )
+    }
+
+    pub fn add_element(&mut self, s: &str) {
+        self.nodes = self.nodes.clone() / tr(String::new() + s);
     }
 
     pub fn set_width(&mut self, width: f32) {
