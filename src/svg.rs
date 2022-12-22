@@ -1,4 +1,6 @@
 use std::fmt;
+use std::fs::File;
+use std::io::Write;
 use trees;
 use trees::tr;
 
@@ -72,6 +74,11 @@ impl Svg {
 
     pub fn set_height(&mut self, height: f32) {
         self.height = height;
+    }
+
+    pub fn to_file(&self, path: &str) -> std::io::Result<()> {
+        let mut output = File::create(path)?;
+        write!(output, "{}", self.to_string())
     }
 }
 

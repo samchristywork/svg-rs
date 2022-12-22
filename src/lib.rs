@@ -8,7 +8,6 @@ pub fn add(left: usize, right: usize) -> usize {
 mod tests {
     use super::*;
     use svg::Svg;
-    use trees::tr;
 
     #[test]
     fn hello_world() {
