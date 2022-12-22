@@ -1,4 +1,5 @@
 pub mod path;
+pub mod shape;
 pub mod svg;
 
 pub fn add(left: usize, right: usize) -> usize {
@@ -9,6 +10,7 @@ pub fn add(left: usize, right: usize) -> usize {
 mod tests {
     use super::*;
     use path::Path;
+    use shape::Circle;
     use svg::Svg;
 
     #[test]
@@ -26,7 +28,9 @@ mod tests {
     fn circle() {
         let mut svg = Svg::new(50.0, 50.0);
 
-        svg.add_element("<circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" />");
+        let circle = Circle::new(50.0, 50.0, 40.0);
+
+        svg.add_shape(circle);
 
         assert_eq!(
             svg.to_string(),
@@ -40,8 +44,8 @@ mod tests {
     fn double_circle() {
         let mut svg = Svg::new(100.0, 100.0);
 
-        svg.add_element("<circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" />");
-        svg.add_element("<circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" />");
+        svg.add_shape(Circle::new(50.0, 50.0, 40.0));
+        svg.add_shape(Circle::new(50.0, 50.0, 40.0));
 
         assert_eq!(
             svg.to_string(),
@@ -64,9 +68,9 @@ mod tests {
 
         svg.add_element(format!("<path d=\"{}\" />", path.to_string()).as_str());
 
-        println!("\n\n{}\n\n", svg);
+        //println!("\n\n{}\n\n", svg);
 
-        svg.to_file("out.svg").unwrap();
+        //svg.to_file("out.svg").unwrap();
 
         assert_eq!(1, 1);
     }

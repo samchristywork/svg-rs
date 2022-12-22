@@ -1,3 +1,4 @@
+use crate::shape;
 use std::fmt;
 use std::fs::File;
 use std::io::Write;
@@ -57,6 +58,14 @@ impl Svg {
         self.nodes = self.nodes.clone()
             / tr(Node {
                 begin: s.to_string(),
+                end: String::new(),
+            });
+    }
+
+    pub fn add_shape<S: shape::Shape>(&mut self, s: S) {
+        self.nodes = self.nodes.clone()
+            / tr(Node {
+                begin: s.to_svg(),
                 end: String::new(),
             });
     }
