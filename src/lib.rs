@@ -1,25 +1,7 @@
-use trees::Node;
-
 pub mod svg;
 
 pub fn add(left: usize, right: usize) -> usize {
     left + right
-}
-
-fn tree_to_string<T>(node: &Node<T>) -> String
-where
-    T: std::fmt::Display,
-{
-    if node.has_no_child() {
-        node.data().to_string()
-    } else {
-        format!(
-            "{}( {})",
-            node.data(),
-            node.iter()
-                .fold(String::new(), |s, c| s + &tree_to_string(c) + &" ")
-        )
-    }
 }
 
 #[cfg(test)]

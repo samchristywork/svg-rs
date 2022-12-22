@@ -1,10 +1,22 @@
 use std::fmt;
 use trees::tr;
 
+#[derive(Clone)]
+pub struct Node {
+    pub begin: String,
+    pub end: String,
+}
+
+impl fmt::Display for Node {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "{}{}", self.begin, self.end)
+    }
+}
+
 pub struct Svg {
     width: f32,
     height: f32,
-    nodes: trees::Tree<String>,
+    pub nodes: trees::Tree<Node>,
 }
 
 impl Svg {
