@@ -12,13 +12,11 @@ mod tests {
 
     #[test]
     fn hello_world() {
-        let mut svg = Svg::new(50.0, 50.0);
-
-        svg.set_height(100.0);
+        let svg = Svg::new(50.0, 50.0);
 
         assert_eq!(
             svg.to_string(),
-            "<svg viewBox=\"0 0 50 100\" \
+            "<svg viewBox=\"0 0 50 50\" \
             xmlns=\"http://www.w3.org/2000/svg\"></svg>"
         );
     }
@@ -39,16 +37,17 @@ mod tests {
 
     #[test]
     fn double_circle() {
-        let mut svg = Svg::new(50.0, 50.0);
+        let mut svg = Svg::new(100.0, 100.0);
 
         svg.add_element("<circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" />");
         svg.add_element("<circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" />");
 
         assert_eq!(
             svg.to_string(),
-            "<svg viewBox=\"0 0 50 100\" \
-            <circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" /> \
-            xmlns=\"http://www.w3.org/2000/svg\"></svg>"
+            "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\">\n\
+            <circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" />\n\
+            <circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" />\n\
+            </svg>"
         );
     }
 
