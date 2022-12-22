@@ -93,3 +93,52 @@ impl<'a> Line<'a> {
     }
 }
 
+pub struct Bezier<'a> {
+    x1: f32,
+    y1: f32,
+    x2: f32,
+    y2: f32,
+    x3: f32,
+    y3: f32,
+    x4: f32,
+    y4: f32,
+    style: &'a str,
+}
+
+impl Shape for Bezier<'_> {
+    fn to_svg(&self) -> String {
+        format!(
+            "<path d=\"M {} {} C {} {} \
+            {} {} {} {}\" \
+            style=\"{}\" />",
+            self.x1, self.y1, self.x2, self.y2, self.x3, self.y3, self.x4, self.y4, self.style
+        )
+    }
+}
+
+impl<'a> Bezier<'a> {
+    pub fn new(
+        x1: f32,
+        y1: f32,
+        x2: f32,
+        y2: f32,
+        x3: f32,
+        y3: f32,
+        x4: f32,
+        y4: f32,
+        style: &'a str,
+    ) -> Self {
+        Self {
+            x1,
+            y1,
+            x2,
+            y2,
+            x3,
+            y3,
+            x4,
+            y4,
+            style,
+        }
+    }
+}
+
