@@ -63,3 +63,33 @@ impl<'a> Rectangle<'a> {
         self.ry = ry;
     }
 }
+
+pub struct Line<'a> {
+    x1: f32,
+    y1: f32,
+    x2: f32,
+    y2: f32,
+    style: &'a str,
+}
+
+impl Shape for Line<'_> {
+    fn to_svg(&self) -> String {
+        format!(
+            "<line x1=\"{}\" y1=\"{}\" x2=\"{}\" y2=\"{}\" style=\"{}\" />",
+            self.x1, self.y1, self.x2, self.y2, self.style
+        )
+    }
+}
+
+impl<'a> Line<'a> {
+    pub fn new(x1: f32, y1: f32, x2: f32, y2: f32, style: &'a str) -> Self {
+        Self {
+            x1,
+            y1,
+            x2,
+            y2,
+            style,
+        }
+    }
+}
+
