@@ -27,6 +27,8 @@ impl<'a> Circle<'a> {
 pub struct Rectangle<'a> {
     x: f32,
     y: f32,
+    rx: f32,
+    ry: f32,
     width: f32,
     height: f32,
     style: &'a str,
@@ -35,8 +37,10 @@ pub struct Rectangle<'a> {
 impl Shape for Rectangle<'_> {
     fn to_svg(&self) -> String {
         format!(
-            "<rectangle x=\"{}\" y=\"{}\" width=\"{}\" height=\"{}\" style=\"{}\" />",
-            self.x, self.y, self.width, self.height, self.style
+            "<rect x=\"{}\" y=\"{}\" width=\"{}\" height=\"{}\" \
+            rx=\"{}\" ry=\"{}\" \
+            style=\"{}\" />",
+            self.x, self.y, self.width, self.height, self.rx, self.ry, self.style
         )
     }
 }
@@ -46,9 +50,16 @@ impl<'a> Rectangle<'a> {
         Self {
             x,
             y,
+            rx: 0.0,
+            ry: 0.0,
             width,
             height,
             style,
         }
+    }
+
+    pub fn rounded(&mut self, rx: f32, ry: f32) {
+        self.rx = rx;
+        self.ry = ry;
     }
 }

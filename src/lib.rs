@@ -45,12 +45,34 @@ mod tests {
     fn rectangle() {
         let mut svg = Svg::new(50.0, 50.0);
 
-        svg.add_shape(Rectangle::new(50.0, 50.0, 10.0, 10.0, "fill:black"));
+        svg.add_shape(Rectangle::new(30.0, 30.0, 10.0, 10.0, "fill:black"));
 
         assert_eq!(
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
-            <rectangle x=\"50\" y=\"50\" width=\"10\" height=\"10\" style=\"fill:black\" />\n\
+            <rect x=\"30\" y=\"30\" width=\"10\" height=\"10\" \
+            rx=\"0\" ry=\"0\" style=\"fill:black\" />\n\
+            </svg>"
+        );
+    }
+
+    #[test]
+    fn rectangle_rounded() {
+        let mut svg = Svg::new(50.0, 50.0);
+
+        let mut rect = Rectangle::new(30.0, 30.0, 10.0, 10.0, "fill:black");
+
+        rect.rounded(2.0, 2.0);
+
+        svg.add_shape(rect);
+
+        svg.to_file("rect.svg").unwrap();
+
+        assert_eq!(
+            svg.to_string(),
+            "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
+            <rect x=\"30\" y=\"30\" width=\"10\" height=\"10\" \
+            rx=\"2\" ry=\"2\" style=\"fill:black\" />\n\
             </svg>"
         );
     }
