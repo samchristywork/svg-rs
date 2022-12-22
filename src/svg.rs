@@ -53,13 +53,6 @@ impl Svg {
         }
     }
 
-    fn svg_tag(&self) -> String {
-        format!(
-            "<svg viewBox=\"0 0 {} {}\" xmlns=\"http://www.w3.org/2000/svg\"></svg>",
-            self.width, self.height
-        )
-    }
-
     pub fn add_element(&mut self, s: &str) {
         self.nodes = self.nodes.clone()
             / tr(Node {

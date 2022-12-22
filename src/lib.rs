@@ -1,3 +1,4 @@
+pub mod path;
 pub mod svg;
 
 pub fn add(left: usize, right: usize) -> usize {
@@ -7,6 +8,7 @@ pub fn add(left: usize, right: usize) -> usize {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use path::Path;
     use svg::Svg;
 
     #[test]
@@ -51,12 +53,21 @@ mod tests {
     }
 
     #[test]
-    fn asdf() {
-        let mut scattered_tree = tr(0);
-        scattered_tree = scattered_tree / tr(1);
-        scattered_tree = scattered_tree / tr(2);
-        scattered_tree = scattered_tree / tr(3);
+    fn playground() {
+        let mut svg = Svg::new(200.0, 200.0);
 
-        assert_eq!(scattered_tree, tr(0) / tr(1) / tr(2) / tr(3));
+        let mut path = Path::new(150.0, 0.0);
+
+        path.line_to(75.0, 200.0);
+
+        path.line_to(225.0, 200.0);
+
+        svg.add_element(format!("<path d=\"{}\" />", path.to_string()).as_str());
+
+        println!("\n\n{}\n\n", svg);
+
+        svg.to_file("out.svg").unwrap();
+
+        assert_eq!(1, 1);
     }
 }
