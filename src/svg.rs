@@ -1,5 +1,20 @@
 use std::fmt;
+use trees;
 use trees::tr;
+
+fn tree_to_string(node: &trees::Node<Node>) -> String {
+    if node.has_no_child() {
+        node.data().begin.clone() + node.data().end.clone().as_str()
+    } else {
+        format!(
+            "{}\n{}{}",
+            node.data().begin,
+            node.iter()
+                .fold(String::new(), |s, c| s + &tree_to_string(c) + &"\n"),
+            node.data().end,
+        )
+    }
+}
 
 #[derive(Clone)]
 pub struct Node {
@@ -24,7 +39,15 @@ impl Svg {
         Self {
             width,
             height,
-            nodes: tr(String::new()),
+            nodes: tr(Node {
+                begin: String::new()
+                    + format!(
+                        "<svg viewBox=\"0 0 {} {}\" xmlns=\"http://www.w3.org/2000/svg\">",
+                        width, height
+                    )
+                    .as_str(),
+                end: String::new() + "</svg>",
+            }),
         }
     }
 
@@ -36,7 +59,11 @@ impl Svg {
     }
 
     pub fn add_element(&mut self, s: &str) {
-        self.nodes = self.nodes.clone() / tr(String::new() + s);
+        self.nodes = self.nodes.clone()
+            / tr(Node {
+                begin: s.to_string(),
+                end: String::new(),
+            });
     }
 
     pub fn set_width(&mut self, width: f32) {
@@ -50,6 +77,6 @@ impl Svg {
 
 impl fmt::Display for Svg {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "{}", self.svg_tag())
+        write!(f, "{}", tree_to_string(&self.nodes))
     }
 }
