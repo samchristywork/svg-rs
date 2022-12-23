@@ -10,6 +10,7 @@ pub fn add(left: usize, right: usize) -> usize {
 mod tests {
     use super::*;
     use path::Path;
+    use shape::Bezier;
     use shape::Circle;
     use shape::Line;
     use shape::Rectangle;
@@ -92,6 +93,32 @@ mod tests {
             <line x1=\"10\" y1=\"10\" x2=\"20\" y2=\"20\" \
             style=\"stroke:black\" />\n\
             </svg>"
+        );
+    }
+
+    #[test]
+    fn bezier() {
+        let mut svg = Svg::new(50.0, 50.0);
+
+        let bezier = Bezier::new(
+            10.0,
+            10.0,
+            20.0,
+            10.0,
+            10.0,
+            20.0,
+            20.0,
+            20.0,
+            "stroke:black; fill:none; stroke-width:.1",
+        );
+
+        svg.add_shape(bezier);
+
+        assert_eq!(
+            svg.to_string(),
+            "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
+            <path d=\"M 10 10 C 20 10 10 20 20 20\" style=\"stroke:black; fill:none; \
+            stroke-width:.1\" />\n</svg>",
         );
     }
 
