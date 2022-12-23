@@ -11,6 +11,7 @@ mod tests {
     use super::*;
     use path::Path;
     use shape::Circle;
+    use shape::Line;
     use shape::Rectangle;
     use svg::Svg;
 
@@ -73,6 +74,23 @@ mod tests {
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
             <rect x=\"30\" y=\"30\" width=\"10\" height=\"10\" \
             rx=\"2\" ry=\"2\" style=\"fill:black\" />\n\
+            </svg>"
+        );
+    }
+
+    #[test]
+    fn line() {
+        let mut svg = Svg::new(50.0, 50.0);
+
+        let line = Line::new(10.0, 10.0, 20.0, 20.0, "stroke:black");
+
+        svg.add_shape(line);
+
+        assert_eq!(
+            svg.to_string(),
+            "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
+            <line x1=\"10\" y1=\"10\" x2=\"20\" y2=\"20\" \
+            style=\"stroke:black\" />\n\
             </svg>"
         );
     }
