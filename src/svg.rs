@@ -13,7 +13,7 @@ fn tree_to_string(node: &trees::Node<Node>) -> String {
             "{}\n{}{}",
             node.data().begin,
             node.iter()
-                .fold(String::new(), |s, c| s + &tree_to_string(c) + &"\n"),
+                .fold(String::new(), |s, c| s + &tree_to_string(c) + "\n"),
             node.data().end,
         )
     }
@@ -38,7 +38,7 @@ pub struct Svg {
 }
 
 impl Svg {
-    pub fn new(width: f32, height: f32) -> Self {
+    #[must_use] pub fn new(width: f32, height: f32) -> Self {
         Self {
             width,
             height,
@@ -80,7 +80,7 @@ impl Svg {
 
     pub fn to_file(&self, path: &str) -> std::io::Result<()> {
         let mut output = File::create(path)?;
-        write!(output, "{}", self.to_string())
+        write!(output, "{}", self)
     }
 }
 

@@ -19,7 +19,7 @@ impl Shape for Circle<'_> {
 }
 
 impl<'a> Circle<'a> {
-    pub fn new(x: f32, y: f32, r: f32, style: &'a str) -> Self {
+    #[must_use] pub fn new(x: f32, y: f32, r: f32, style: &'a str) -> Self {
         Self { x, y, r, style }
     }
 }
@@ -46,7 +46,7 @@ impl Shape for Rectangle<'_> {
 }
 
 impl<'a> Rectangle<'a> {
-    pub fn new(x: f32, y: f32, width: f32, height: f32, style: &'a str) -> Self {
+    #[must_use] pub fn new(x: f32, y: f32, width: f32, height: f32, style: &'a str) -> Self {
         Self {
             x,
             y,
@@ -82,7 +82,7 @@ impl Shape for Line<'_> {
 }
 
 impl<'a> Line<'a> {
-    pub fn new(x1: f32, y1: f32, x2: f32, y2: f32, style: &'a str) -> Self {
+    #[must_use] pub fn new(x1: f32, y1: f32, x2: f32, y2: f32, style: &'a str) -> Self {
         Self {
             x1,
             y1,
@@ -117,7 +117,7 @@ impl Shape for Bezier<'_> {
 }
 
 impl<'a> Bezier<'a> {
-    pub fn new(
+    #[must_use] pub fn new(
         x1: f32,
         y1: f32,
         x2: f32,
@@ -160,7 +160,7 @@ impl Shape for Text<'_> {
 }
 
 impl<'a> Text<'a> {
-    pub fn new(x: f32, y: f32, size: f32, style: &'a str, text: &'a str) -> Self {
+    #[must_use] pub fn new(x: f32, y: f32, size: f32, style: &'a str, text: &'a str) -> Self {
         Self {
             x,
             y,

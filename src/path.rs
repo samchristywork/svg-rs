@@ -5,7 +5,7 @@ pub struct Path {
 }
 
 impl Path {
-    pub fn new(x: f32, y: f32) -> Self {
+    #[must_use] pub fn new(x: f32, y: f32) -> Self {
         Self {
             points: vec![(x, y)],
         }

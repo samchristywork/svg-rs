@@ -2,7 +2,7 @@ pub mod path;
 pub mod shape;
 pub mod svg;
 
-pub fn add(left: usize, right: usize) -> usize {
+#[must_use] pub fn add(left: usize, right: usize) -> usize {
     left + right
 }
 
@@ -165,7 +165,7 @@ mod tests {
 
         path.line_to(225.0, 200.0);
 
-        svg.add_element(format!("<path d=\"{}\" />", path.to_string()).as_str());
+        svg.add_element(format!("<path d=\"{}\" />", path).as_str());
 
         //println!("\n\n{}\n\n", svg);
 
