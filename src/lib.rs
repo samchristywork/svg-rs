@@ -14,6 +14,7 @@ mod tests {
     use shape::Circle;
     use shape::Line;
     use shape::Rectangle;
+    use shape::Text;
     use svg::Svg;
 
     #[test]
@@ -119,6 +120,22 @@ mod tests {
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
             <path d=\"M 10 10 C 20 10 10 20 20 20\" style=\"stroke:black; fill:none; \
             stroke-width:.1\" />\n</svg>",
+        );
+    }
+
+    #[test]
+    fn text() {
+        let mut svg = Svg::new(50.0, 50.0);
+
+        svg.add_shape(Text::new(10.0, 10.0, 2.0, "fill:black", "Hello, World!"));
+
+        svg.to_file("text.svg").unwrap();
+
+        assert_eq!(
+            svg.to_string(),
+            "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
+            <text x=\"10\" y=\"10\" font-size=\"2\" style=\"fill:black\">Hello, World!</text>\n\
+            </svg>",
         );
     }
 
