@@ -161,6 +161,32 @@ mod tests {
     }
 
     #[test]
+    fn transform() {
+        let mut svg = Svg::new(100.0, 100.0);
+
+        svg.add_shape(Rectangle::new(30.0, 30.0, 10.0, 10.0, "", "fill:black"));
+
+        svg.add_shape(Rectangle::new(
+            30.0,
+            30.0,
+            10.0,
+            10.0,
+            "rotate(40 20 40)",
+            "fill:red",
+        ));
+
+        assert_eq!(
+            svg.to_string(),
+            "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\">\n\
+            <rect x=\"30\" y=\"30\" width=\"10\" height=\"10\" rx=\"0\" ry=\"0\" \
+            transform=\"\" style=\"fill:black\" />\n\
+            <rect x=\"30\" y=\"30\" width=\"10\" height=\"10\" rx=\"0\" ry=\"0\" \
+            transform=\"rotate(40 20 40)\" style=\"fill:red\" />\n\
+            </svg>"
+        );
+    }
+
+    #[test]
     fn playground() {
         let mut svg = Svg::new(200.0, 200.0);
 
