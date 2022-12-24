@@ -133,8 +133,6 @@ mod tests {
             "Hello, World!",
         ));
 
-        svg.to_file("text.svg").unwrap();
-
         assert_eq!(
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
