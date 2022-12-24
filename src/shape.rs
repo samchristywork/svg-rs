@@ -177,3 +177,30 @@ impl<'a> Bezier<'a> {
         }
     }
 }
+
+pub struct Polygon<'a> {
+    points: &'a str,
+    style: &'a str,
+    transform: &'a str,
+}
+
+impl Shape for Polygon<'_> {
+    fn to_svg(&self) -> String {
+        format!(
+            "<polygon points=\"{}\" \
+            transform=\"{}\" style=\"{}\" />",
+            self.points, self.transform, self.style
+        )
+    }
+}
+
+impl<'a> Polygon<'a> {
+    #[must_use]
+    pub fn new(points: &'a str, transform: &'a str, style: &'a str) -> Self {
+        Self {
+            points,
+            style,
+            transform,
+        }
+    }
+}
