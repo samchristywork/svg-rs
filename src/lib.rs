@@ -1,10 +1,7 @@
 pub mod path;
 pub mod shape;
 pub mod svg;
-
-#[must_use] pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+pub mod text;
 
 #[cfg(test)]
 mod tests {
@@ -14,8 +11,8 @@ mod tests {
     use shape::Circle;
     use shape::Line;
     use shape::Rectangle;
-    use shape::Text;
     use svg::Svg;
+    use text::Text;
 
     #[test]
     fn hello_world() {
@@ -68,8 +65,6 @@ mod tests {
         rect.rounded(2.0, 2.0);
 
         svg.add_shape(rect);
-
-        svg.to_file("rect.svg").unwrap();
 
         assert_eq!(
             svg.to_string(),
