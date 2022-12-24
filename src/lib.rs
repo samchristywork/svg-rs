@@ -29,14 +29,14 @@ mod tests {
     fn circle() {
         let mut svg = Svg::new(50.0, 50.0);
 
-        let circle = Circle::new(50.0, 50.0, 40.0, "fill:black");
+        let circle = Circle::new(50.0, 50.0, 40.0, "", "fill:black");
 
         svg.add_shape(circle);
 
         assert_eq!(
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
-            <circle cx=\"50\" cy=\"50\" r=\"40\" style=\"fill:black\" />\n\
+            <circle cx=\"50\" cy=\"50\" r=\"40\" transform=\"\" style=\"fill:black\" />\n\
             </svg>"
         );
     }
@@ -45,13 +45,13 @@ mod tests {
     fn rectangle() {
         let mut svg = Svg::new(50.0, 50.0);
 
-        svg.add_shape(Rectangle::new(30.0, 30.0, 10.0, 10.0, "fill:black"));
+        svg.add_shape(Rectangle::new(30.0, 30.0, 10.0, 10.0, "", "fill:black"));
 
         assert_eq!(
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
             <rect x=\"30\" y=\"30\" width=\"10\" height=\"10\" \
-            rx=\"0\" ry=\"0\" style=\"fill:black\" />\n\
+            rx=\"0\" ry=\"0\" transform=\"\" style=\"fill:black\" />\n\
             </svg>"
         );
     }
@@ -60,7 +60,7 @@ mod tests {
     fn rectangle_rounded() {
         let mut svg = Svg::new(50.0, 50.0);
 
-        let mut rect = Rectangle::new(30.0, 30.0, 10.0, 10.0, "fill:black");
+        let mut rect = Rectangle::new(30.0, 30.0, 10.0, 10.0, "", "fill:black");
 
         rect.rounded(2.0, 2.0);
 
@@ -70,7 +70,7 @@ mod tests {
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
             <rect x=\"30\" y=\"30\" width=\"10\" height=\"10\" \
-            rx=\"2\" ry=\"2\" style=\"fill:black\" />\n\
+            rx=\"2\" ry=\"2\" transform=\"\" style=\"fill:black\" />\n\
             </svg>"
         );
     }
@@ -79,7 +79,7 @@ mod tests {
     fn line() {
         let mut svg = Svg::new(50.0, 50.0);
 
-        let line = Line::new(10.0, 10.0, 20.0, 20.0, "stroke:black");
+        let line = Line::new(10.0, 10.0, 20.0, 20.0, "", "stroke:black");
 
         svg.add_shape(line);
 
@@ -87,7 +87,7 @@ mod tests {
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
             <line x1=\"10\" y1=\"10\" x2=\"20\" y2=\"20\" \
-            style=\"stroke:black\" />\n\
+            transform=\"\" style=\"stroke:black\" />\n\
             </svg>"
         );
     }
@@ -105,6 +105,7 @@ mod tests {
             20.0,
             20.0,
             20.0,
+            "",
             "stroke:black; fill:none; stroke-width:.1",
         );
 
@@ -113,7 +114,8 @@ mod tests {
         assert_eq!(
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
-            <path d=\"M 10 10 C 20 10 10 20 20 20\" style=\"stroke:black; fill:none; \
+            <path d=\"M 10 10 C 20 10 10 20 20 20\" \
+            transform=\"\" style=\"stroke:black; fill:none; \
             stroke-width:.1\" />\n</svg>",
         );
     }
@@ -122,14 +124,22 @@ mod tests {
     fn text() {
         let mut svg = Svg::new(50.0, 50.0);
 
-        svg.add_shape(Text::new(10.0, 10.0, 2.0, "fill:black", "Hello, World!"));
+        svg.add_shape(Text::new(
+            10.0,
+            10.0,
+            2.0,
+            "",
+            "fill:black",
+            "Hello, World!",
+        ));
 
         svg.to_file("text.svg").unwrap();
 
         assert_eq!(
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
-            <text x=\"10\" y=\"10\" font-size=\"2\" style=\"fill:black\">Hello, World!</text>\n\
+            <text x=\"10\" y=\"10\" font-size=\"2\" \
+            transform=\"\" style=\"fill:black\">Hello, World!</text>\n\
             </svg>",
         );
     }
@@ -138,14 +148,14 @@ mod tests {
     fn double_circle() {
         let mut svg = Svg::new(100.0, 100.0);
 
-        svg.add_shape(Circle::new(50.0, 50.0, 40.0, "fill:black"));
-        svg.add_shape(Circle::new(50.0, 50.0, 40.0, "fill:black"));
+        svg.add_shape(Circle::new(50.0, 50.0, 40.0, "", "fill:black"));
+        svg.add_shape(Circle::new(50.0, 50.0, 40.0, "", "fill:black"));
 
         assert_eq!(
             svg.to_string(),
             "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\">\n\
-            <circle cx=\"50\" cy=\"50\" r=\"40\" style=\"fill:black\" />\n\
-            <circle cx=\"50\" cy=\"50\" r=\"40\" style=\"fill:black\" />\n\
+            <circle cx=\"50\" cy=\"50\" r=\"40\" transform=\"\" style=\"fill:black\" />\n\
+            <circle cx=\"50\" cy=\"50\" r=\"40\" transform=\"\" style=\"fill:black\" />\n\
             </svg>"
         );
     }
