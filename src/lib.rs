@@ -18,6 +18,8 @@ mod tests {
     fn hello_world() {
         let svg = Svg::new(50.0, 50.0);
 
+        svg.to_file("target/hello_world.svg").unwrap();
+
         assert_eq!(
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" \
@@ -33,6 +35,8 @@ mod tests {
 
         svg.add_shape(circle);
 
+        svg.to_file("target/circle.svg").unwrap();
+
         assert_eq!(
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
@@ -46,6 +50,8 @@ mod tests {
         let mut svg = Svg::new(50.0, 50.0);
 
         svg.add_shape(Rectangle::new(30.0, 30.0, 10.0, 10.0, "", "fill:black"));
+
+        svg.to_file("target/rectangle.svg").unwrap();
 
         assert_eq!(
             svg.to_string(),
@@ -66,6 +72,8 @@ mod tests {
 
         svg.add_shape(rect);
 
+        svg.to_file("target/rectangle_rounded.svg").unwrap();
+
         assert_eq!(
             svg.to_string(),
             "<svg viewBox=\"0 0 50 50\" xmlns=\"http://www.w3.org/2000/svg\">\n\
@@ -82,6 +90,8 @@ mod tests {
         let line = Line::new(10.0, 10.0, 20.0, 20.0, "", "stroke:black");
 
         svg.add_shape(line);
+
+        svg.to_file("target/line.svg").unwrap();
 
         assert_eq!(
             svg.to_string(),
@@ -110,6 +120,8 @@ mod tests {
         );
 
         svg.add_shape(bezier);
+
+        svg.to_file("target/bezier.svg").unwrap();
 
         assert_eq!(
             svg.to_string(),
@@ -148,6 +160,8 @@ mod tests {
 
         svg.add_shape(Circle::new(50.0, 50.0, 40.0, "", "fill:black"));
         svg.add_shape(Circle::new(50.0, 50.0, 40.0, "", "fill:black"));
+
+        svg.to_file("target/double_circle.svg").unwrap();
 
         assert_eq!(
             svg.to_string(),
@@ -199,6 +213,8 @@ mod tests {
         //println!("\n\n{}\n\n", svg);
 
         //svg.to_file("out.svg").unwrap();
+
+        svg.to_file("target/playground.svg").unwrap();
 
         assert_eq!(1, 1);
     }
