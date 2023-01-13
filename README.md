@@ -2,6 +2,10 @@
 
 ## Overview
 
+This is a Rust library for creating SVG files. The library supports many of the
+basic shapes, text, and attributes like style and transform. This library is not
+feature complete.
+
 ## Examples
 
 <img alt="SVG example" style="" src="./sample/playground.png">
