@@ -16,6 +16,16 @@
 
 ## Usage
 
+```svg
+let mut svg = Svg::new(100.0, 100.0);
+
+let circle = Circle::new(50.0, 50.0, 10.0, "", "fill:black");
+
+svg.add_shape(circle);
+```
+
+See the `playground` test in `src/lib.rs` for further example usage.
+
 ## License
 
 This work is licensed under the GNU General Public License version 3 (GPLv3).
