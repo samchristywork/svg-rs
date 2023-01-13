@@ -84,11 +84,17 @@ svg.add_shape(bezier);
 ## Usage
 
 ```svg
+// Create a new Svg object
 let mut svg = Svg::new(100.0, 100.0);
 
+// Create shapes
 let circle = Circle::new(50.0, 50.0, 10.0, "", "fill:black");
 
+// Add shapes to the object
 svg.add_shape(circle);
+
+// Write the data to a file
+svg.to_file("some/file/path.svg").unwrap();
 ```
 
 See the `playground` test in `src/lib.rs` for further example usage.
