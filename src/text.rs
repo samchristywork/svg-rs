@@ -1,8 +1,7 @@
 use crate::shape::Shape;
 
 pub struct Text<'a> {
-    x: f32,
-    y: f32,
+    pos: (f32, f32),
     size: f32,
     style: &'a str,
     transform: &'a str,
@@ -14,7 +13,7 @@ impl Shape for Text<'_> {
         format!(
             "<text x=\"{}\" y=\"{}\" font-size=\"{}\" \
             transform=\"{}\" style=\"{}\">{}</text>",
-            self.x, self.y, self.size, self.transform, self.style, self.text
+            self.pos.0, self.pos.1, self.size, self.transform, self.style, self.text
         )
     }
 }
@@ -22,16 +21,14 @@ impl Shape for Text<'_> {
 impl<'a> Text<'a> {
     #[must_use]
     pub fn new(
-        x: f32,
-        y: f32,
+        pos: (f32, f32),
         size: f32,
         transform: &'a str,
         style: &'a str,
         text: &'a str,
     ) -> Self {
         Self {
-            x,
-            y,
+            pos,
             size,
             style,
             transform,

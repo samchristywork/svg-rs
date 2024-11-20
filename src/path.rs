@@ -6,14 +6,12 @@ pub struct Path {
 
 impl Path {
     #[must_use]
-    pub fn new(x: f32, y: f32) -> Self {
-        Self {
-            points: vec![(x, y)],
-        }
+    pub fn new(pos: (f32, f32)) -> Self {
+        Self { points: vec![pos] }
     }
 
-    pub fn line_to(&mut self, x: f32, y: f32) {
-        self.points.push((x, y));
+    pub fn line_to(&mut self, pos: (f32, f32)) {
+        self.points.push(pos);
     }
 }
 

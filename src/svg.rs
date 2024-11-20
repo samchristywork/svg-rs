@@ -38,7 +38,8 @@ pub struct Svg {
 }
 
 impl Svg {
-    #[must_use] pub fn new(width: f32, height: f32) -> Self {
+    #[must_use]
+    pub fn new(width: f32, height: f32) -> Self {
         Self {
             width,
             height,
