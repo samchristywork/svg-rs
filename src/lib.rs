@@ -5,12 +5,14 @@ pub mod text;
 
 #[cfg(test)]
 mod tests {
-    use super::*;
     use path::Path;
     use shape::Bezier;
     use shape::Circle;
     use shape::Line;
     use shape::Rectangle;
+    use std::fs::File;
+    use std::io::{self, Read};
+    use super::*;
     use svg::Svg;
     use text::Text;
 
@@ -198,35 +200,35 @@ mod tests {
         );
     }
 
+    fn read_file_to_string(filename: &str) -> io::Result<String> {
+        let mut file = File::open(filename)?;
+        let mut contents = String::new();
+        file.read_to_string(&mut contents)?;
+        Ok(contents)
+    }
+
     #[test]
-    fn playground() {
-        let mut svg = Svg::new(400.0, 300.0);
+    fn misc() {
+        let mut svg = Svg::new(400.0, 260.0);
 
         let mut path = Path::new(50.0, 0.0);
-
         path.line_to(0.0, 100.0);
-
         path.line_to(100.0, 100.0);
-
         svg.add_element(format!("<path d=\"{}\" />", path).as_str());
 
-        let circle = Circle::new(150.0, 50.0, 40.0, "", "fill:black");
-
+        let circle = Circle::new(150.0, 50.0, 40.0, "", "fill:red");
         svg.add_shape(circle);
 
-        svg.add_shape(Rectangle::new(230.0, 30.0, 50.0, 50.0, "", "fill:black"));
+        svg.add_shape(Rectangle::new(230.0, 30.0, 50.0, 50.0, "", "fill:orange"));
 
-        let mut rect = Rectangle::new(330.0, 30.0, 50.0, 50.0, "", "fill:black");
-
+        let mut rect = Rectangle::new(330.0, 30.0, 50.0, 50.0, "", "fill:yellow");
         rect.rounded(8.0, 8.0);
-
         svg.add_shape(rect);
 
-        let line = Line::new(10.0, 110.0, 80.0, 180.0, "", "stroke:black");
-
+        let line = Line::new(10.0, 110.0, 80.0, 180.0, "", "stroke:green");
         svg.add_shape(line);
 
-        svg.add_shape(Rectangle::new(130.0, 130.0, 50.0, 50.0, "", "fill:black"));
+        svg.add_shape(Rectangle::new(130.0, 130.0, 50.0, 50.0, "", "fill:blue"));
 
         svg.add_shape(Rectangle::new(
             30.0,
@@ -234,7 +236,7 @@ mod tests {
             10.0,
             10.0,
             "translate(200 100) rotate(40 20 40)",
-            "fill:red",
+            "fill:purple",
         ));
 
         svg.add_shape(Text::new(
@@ -242,31 +244,27 @@ mod tests {
             110.0,
             10.0,
             "",
-            "fill:black",
+            "fill:violet",
             "Hello, World!",
         ));
 
         let bezier = Bezier::new(
             40.0,
+            200.0,
+            200.0,
+            200.0,
+            140.0,
             240.0,
-            80.0,
+            300.0,
             240.0,
-            40.0,
-            280.0,
-            80.0,
-            280.0,
             "",
             "stroke:black; fill:none; stroke-width:1",
         );
-
         svg.add_shape(bezier);
 
-        //println!("\n\n{}\n\n", svg);
+        svg.to_file("target/shapes.svg").unwrap();
 
-        //svg.to_file("out.svg").unwrap();
-
-        svg.to_file("target/playground.svg").unwrap();
-
-        assert_eq!(1, 1);
+        let contents=read_file_to_string("sample/shapes.svg").unwrap();
+        assert_eq!(contents, svg.to_string());
     }
 }
